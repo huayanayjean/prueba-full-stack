@@ -1,0 +1,22 @@
+<app-navbar></app-navbar>
+<div class="container mt-3">
+    <h2>Asignar Curso a Estudiante</h2>
+    <form [formGroup]="formCursoEstudiante" (ngSubmit)="agregarCurso()">
+        <div class="mb-3">
+            <label for="estudiantes" class="form-label">Estudiantes</label>
+            <select formControlName="estudiante" class="form-select" id="estudiantes" name="estudiantes" required>
+                <option value="">Seleccione un estudiante</option>
+                <option *ngFor="let estudiante of estudiantes" [value]="estudiante.id">{{ estudiante.nombre }}</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="curso" class="form-label">Curso</label>
+            <select style="height: 300px;" formControlName="curso" class="form-select" id="curso" name="curso" multiple
+                required>
+                <option value="">Seleccione uno o varios cursos</option>
+                <option *ngFor="let curso of cursos" [value]="curso.id">{{ curso.nombre }}</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Asignar Estudiantes</button>
+    </form>
+</div>

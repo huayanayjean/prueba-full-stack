@@ -1,0 +1,108 @@
+<app-navbar></app-navbar>
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            <div class="card rounded p-3">
+                <h2>Top 3 Cursos con más estudiantes</h2>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Curso</th>
+                            <th>Total Estudiantes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let curso of topCursos">
+                            <td>{{ curso.nombre }}</td>
+                            <td>{{ curso.total_estudiantes }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <div class="card rounded p-3">
+                <h2>Top 3 Estudiantes con más cursos</h2>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Estudiante</th>
+                            <th>Total Cursos</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let estudiante of topEstudiantes">
+                            <td>{{ estudiante.nombre }}</td>
+                            <td>{{ estudiante.total_cursos }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            <div class="card rounded p-3">
+                <h2>Total cursos</h2>
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <td>{{ totalCursos }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-md-6 mb-3">
+            <div class="card rounded p-3">
+                <h2>Total estudiantes</h2>
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <td>{{ totalEstudiantes }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 mb-2">
+            <form [formGroup]="formCursosPorEstudiante">
+                <div class="card rounded p-3">
+                    <h2>Filtrar estudiantes por curso</h2>
+                    <div class="mb-3">
+                        <label for="estudiantes" class="form-label">Estudiantes</label>
+                        <select formControlName="estudiante" class="form-select" id="estudiantes" name="estudiantes"
+                            (change)="onEstudianteSeleccionado($event.target)" required>
+                            <option value="">Seleccione un estudiante</option>
+                            <option *ngFor="let estudiante of estudiantes" [value]="estudiante.id">{{ estudiante.nombre
+                                }}</option>
+                        </select>
+                    </div>
+                    <table class="table" *ngIf="estudianteSeleccionado">
+                        <thead>
+                            <tr>
+                                <th>Curso registrado</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <ng-container *ngIf="cursosAsignados.length > 0; else noCursos">
+                                <tr *ngFor="let cursosAsignado of cursosAsignados">
+                                    <td>{{ cursosAsignado.nombre }}</td>
+                                </tr>
+                            </ng-container>
+                            <ng-template #noCursos>
+                                <tr>
+                                    <td colspan="1">No tiene cursos asignados</td>
+                                </tr>
+                            </ng-template>
+                        </tbody>
+                    </table>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

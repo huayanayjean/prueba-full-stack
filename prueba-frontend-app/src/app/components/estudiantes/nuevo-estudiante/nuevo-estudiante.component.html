@@ -1,0 +1,49 @@
+<app-navbar></app-navbar>
+<div class="container mt-3">
+    <h2>{{accion}} Estudiante</h2>
+    <form [formGroup]="formNuevoEstudiante" (ngSubmit)="agregarEstudiante()">
+        <div class="mb-3">
+            <label for="nombre" class="form-label">Nombre</label>
+            <input type="text" formControlName="nombre" class="form-control" id="nombre" name="nombre" required>
+            <div *ngIf="formNuevoEstudiante.get('nombre')?.invalid && (formNuevoEstudiante.get('nombre')?.dirty || formNuevoEstudiante.get('nombre')?.touched)"
+                class="text-danger">
+                <div *ngIf="formNuevoEstudiante.get('nombre')?.errors?.['required']">El nombre es obligatorio</div>
+                <div *ngIf="formNuevoEstudiante.get('nombre')?.errors?.['maxlength']">El nombre debe tener menos de 100
+                    caracteres</div>
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="apellido" class="form-label">Apellido</label>
+            <input type="text" formControlName="apellido" class="form-control" id="apellido" name="apellido" required>
+        </div>
+        <div class="mb-3">
+            <label for="edad" class="form-label">Edad</label>
+            <input type="number" formControlName="edad" class="form-control" id="edad" name="edad" required>
+            <div *ngIf="formNuevoEstudiante.get('edad')?.invalid && (formNuevoEstudiante.get('edad')?.dirty || formNuevoEstudiante.get('edad')?.touched)"
+                class="text-danger">
+                <div *ngIf="formNuevoEstudiante.get('edad')?.errors?.['required']">Edad es obligatorio</div>
+                <div *ngIf="formNuevoEstudiante.get('edad')?.errors?.['min']">Edad mínima 18</div>
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" formControlName="email" class="form-control" id="email" name="email" required>
+            <div *ngIf="formNuevoEstudiante.get('email')?.invalid && (formNuevoEstudiante.get('email')?.dirty || formNuevoEstudiante.get('email')?.touched)"
+                class="text-danger">
+                <div *ngIf="formNuevoEstudiante.get('email')?.errors?.['required']">El email es obligatorio</div>
+                <div *ngIf="formNuevoEstudiante.get('email')?.errors?.['email']">Debe tener formato email</div>
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="cedula" class="form-label">Cédula</label>
+            <input type="text" formControlName="cedula" class="form-control" id="cedula" name="cedula" required>
+            <div *ngIf="formNuevoEstudiante.get('cedula')?.invalid && (formNuevoEstudiante.get('cedula')?.dirty || formNuevoEstudiante.get('cedula')?.touched)"
+                class="text-danger">
+                <div *ngIf="formNuevoEstudiante.get('cedula')?.errors?.['required']">Cédula es obligatorio</div>
+                <div *ngIf="formNuevoEstudiante.get('cedula')?.errors?.['maxlength']">El nombre debe tener menos de 11
+                    caracteres</div>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">{{textoBoton}}</button>
+    </form>
+</div>

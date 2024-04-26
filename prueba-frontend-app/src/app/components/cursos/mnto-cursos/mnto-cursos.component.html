@@ -1,0 +1,50 @@
+<app-navbar></app-navbar>
+<div class="container mt-3">
+    <h2>{{accion}} Curso</h2>
+    <form [formGroup]="formMntoCurso" (ngSubmit)="agregarCurso()">
+        <div class="mb-3">
+            <label for="nombre" class="form-label">Nombre</label>
+            <input type="text" formControlName="nombre" class="form-control" id="nombre" name="nombre" required>
+            <div *ngIf="formMntoCurso.get('nombre')?.invalid && (formMntoCurso.get('nombre')?.dirty || formMntoCurso.get('nombre')?.touched)"
+                class="text-danger">
+                <div *ngIf="formMntoCurso.get('nombre')?.errors?.['required']">El nombre es obligatorio</div>
+                <div *ngIf="formMntoCurso.get('nombre')?.errors?.['maxlength']">El nombre debe tener menos de 50
+                    caracteres</div>
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="horario" class="form-label">Horario</label>
+            <input type="text" formControlName="horario" class="form-control" id="horario" name="horario" required>
+        </div>
+        <div class="mb-3">
+            <label for="fecha_inicio" class="form-label">Fecha inicio</label>
+            <input type="date" formControlName="fechaInicio" class="form-control" id="fecha_inicio" name="fecha_inicio"
+                required>
+            <div *ngIf="formMntoCurso.get('fechaInicio')?.invalid && (formMntoCurso.get('fechaInicio')?.dirty || formMntoCurso.get('fechaInicio')?.touched)"
+                class="text-danger">
+                <div *ngIf="formMntoCurso.get('fechaInicio')?.errors?.['required']">Campo obligatorio</div>
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="fecha_fin" class="form-label">Fecha fin</label>
+            <input type="date" formControlName="fechaFin" class="form-control" id="fecha_fin" name="fecha_fin" required>
+            <div *ngIf="formMntoCurso.get('fechaFin')?.invalid && (formMntoCurso.get('fechaFin')?.dirty || formMntoCurso.get('fechaFin')?.touched)"
+                class="text-danger">
+                <div *ngIf="formMntoCurso.get('fechaFin')?.errors?.['required']">Campo obligatorio</div>
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="tipo" class="form-label">Tipo</label>
+            <select formControlName="tipo" class="form-select" id="tipo" name="tipo" required>
+                <option value="">Seleccione un tipo</option>
+                <option value="1">Virtual</option>
+                <option value="2">Presencial</option>
+            </select>
+            <div *ngIf="formMntoCurso.get('tipo')?.invalid && (formMntoCurso.get('tipo')?.dirty || formMntoCurso.get('tipo')?.touched)"
+                class="text-danger">
+                <div *ngIf="formMntoCurso.get('tipo')?.errors?.['required']">Campo obligatorio</div>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">{{textoBoton}}</button>
+    </form>
+</div>
